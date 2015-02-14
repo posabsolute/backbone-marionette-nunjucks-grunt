@@ -1,23 +1,17 @@
 var _ = require('underscore'),
     Backbone = require('backbone');
-    Backbone.$ = require("jQuery");
     Marionette = require('backbone.marionette');
     
-var MyRouter = Backbone.Marionette.AppRouter.extend({
-  // "someMethod" must exist at controller.someMethod
-  appRoutes: {
-    "some/route": "someMethod"
-  },
-
+var BaseRouter = Backbone.Marionette.AppRouter.extend({
   /* standard routes can be mixed with appRoutes/Controllers above */
   routes : {
-    "some/otherRoute" : "someOtherMethod"
+    "/" : "home"
   },
-  someOtherMethod : function(){
-    // do something here.
+  home : function(){
+    console.log("criss");
   }
 
 });
 
 
-module.exports = MyRouter;
+module.exports = BaseRouter;

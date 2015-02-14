@@ -53,14 +53,19 @@ module.exports = function(grunt) {
         },
         nunjucks: {
           precompile: {
-            baseDir: 'src/scripts/views/',
-            src: 'src/scripts/views/*/*.html',
-            dest: 'dist/js/templates.js'
+            baseDir: 'src/scripts',
+            src: ['src/scripts/views/**/*.html','src/scripts/components/**/*.html'],
+            dest: 'src/templates.js'
           }
         },
         uglify: {
           options: {
             mangle: false
+          },
+          dependencies:{
+            files: {
+              'dist/js/dependencies.js': ['node_modules/jquery/dist/jquery.min.js','node_modules/nunjucks/browser/nunjucks-slim.js', 'src/templates.js']
+            }
           },
           prod: {
             files: {
@@ -87,9 +92,13 @@ module.exports = function(grunt) {
                 files: ['src/css/*.scss','src/css/**/*.scss'],
                 tasks: ['sass']
             },
+            js: {
+                files: ['src/scripts/*.js','src/scripts/**/*.js'],
+                tasks: ['js']
+            },
             html:{
-                files: ['src/views/*.html','src/views/**/*.html'],
-                tasks: ['nunjucks']
+                files: ['src/scripts/views/*.html','src/scripts/views/**/*.html', 'src/scripts/components/**/*.html'],
+                tasks: ['templates']
             }
         }
     });
@@ -103,6 +112,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-nunjucks');
 
     grunt.registerTask('default',['watch']);
-    grunt.registerTask('buildjs',['jshint','browserify', 'uglify']);
+    grunt.registerTask('templates',['nunjucks', 'uglify:dependencies']);
+    grunt.registerTask('js',['jshint','browserify']);
+    grunt.registerTask('build',['jshint','browserify', 'uglify']);
 
 };
