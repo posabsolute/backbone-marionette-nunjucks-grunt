@@ -36,7 +36,8 @@ module.exports = function(grunt) {
             },
             options: {
               browserifyOptions : {
-                debug: true 
+                debug: true,
+             //   basedir : ""
               }
             }
           },
@@ -64,7 +65,14 @@ module.exports = function(grunt) {
           },
           dependencies:{
             files: {
-              'dist/js/dependencies.js': ['node_modules/jquery/dist/jquery.min.js','node_modules/nunjucks/browser/nunjucks-slim.js', 'src/templates.js']
+              'dist/js/dependencies.js': [
+                'node_modules/jquery/dist/jquery.min.js',
+                'node_modules/nunjucks/browser/nunjucks-slim.js', 
+                'src/templates.js',
+                'node_modules/gsap/src/minified/TweenLite.min.js',
+                'node_modules/gsap/src/minified/plugins/CSSPlugin.min.js',
+                'node_modules/gsap/src/minified/jquery.gasp.js'
+              ]
             }
           },
           prod: {
