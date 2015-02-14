@@ -79,7 +79,7 @@ module.exports = function(grunt) {
               port: 8555,
               keepalive : true,
               livereload: true,
-              base : "dist",
+              base : "",
               hostname: '*'
             }
           }
@@ -93,13 +93,18 @@ module.exports = function(grunt) {
                 tasks: ['sass']
             },
             js: {
-                files: ['src/scripts/*.js','src/scripts/**/*.js'],
+                files: ['src/scritepts/*.js','src/scripts/**/*.js'],
                 tasks: ['js']
             },
             html:{
                 files: ['src/scripts/views/*.html','src/scripts/views/**/*.html', 'src/scripts/components/**/*.html'],
                 tasks: ['templates']
             }
+        },
+        webdriver: {
+          githubTest: {
+            tests: 'tests/selenium/sidebar.test.js'
+          }
         }
     });
 
@@ -110,10 +115,14 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-nunjucks');
+    grunt.loadNpmTasks('grunt-webdriver');
 
     grunt.registerTask('default',['watch']);
     grunt.registerTask('templates',['nunjucks', 'uglify:dependencies']);
     grunt.registerTask('js',['jshint','browserify']);
     grunt.registerTask('build',['jshint','browserify', 'uglify']);
+
+    grunt.registerTask('test-selenium',['webdriver']);
+
 
 };
