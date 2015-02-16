@@ -1,84 +1,119 @@
-//
-// Grid system
-// --------------------------------------------------
-
-
-// Container widths
-//
-// Set the container width, and override it for fixed navbars in media queries.
-
 .container {
-  @include container-fixed;
+  padding: 0 $gutter-width;
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 90%;
+}
+@media #{$medium-and-up} {
+  .container {
+    width: 85%;
+  }
+}
+@media #{$large-and-up} {
+  .container {
+    width: 70%;
+  }
+}
+.container .row {
+  margin-left: (-1 * $gutter-width / 2);
+  margin-right: (-1 * $gutter-width / 2);
+}
 
-  @media (min-width: $screen-sm-min) {
-    width: $container-sm;
+.section {
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+
+  &.no-pad {
+    padding: 0;
   }
-  @media (min-width: $screen-md-min) {
-    width: $container-md;
+  &.no-pad-bot {
+    padding-bottom: 0;
   }
-  @media (min-width: $screen-lg-min) {
-    width: $container-lg;
+  &.no-pad-top {
+    padding-top: 0;
   }
 }
 
-
-// Fluid container
-//
-// Utilizes the mixin meant for fixed width containers, but without any defined
-// width for fluid, full width layouts.
-
-.container-fluid {
-  @include container-fixed;
-}
-
-
-// Row
-//
-// Rows contain and clear the floats of your columns.
 
 .row {
-  @include make-row;
-}
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
 
+  // Clear floating children
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 
-// Columns
-//
-// Common styles for small and large grid columns
+  .col {
+    @include transition(all .3s);
+    float: left;
+    @include box-sizing(border-box);
+    padding: 0 $gutter-width / 2;
 
-@include make-grid-columns;
+    $i: 1;
+    @while $i <= $num-cols {
+      $perc: unquote((100 / ($num-cols / $i)) + "%");
+      &.s#{$i} { 
+        width: $perc; 
+        margin-left: 0;
+      }
+      $i: $i + 1;
+    } 
+    $i: 1;
+    @while $i <= $num-cols {
+      $perc: unquote((100 / ($num-cols / $i)) + "%");
+      &.offset-s#{$i} { 
+        margin-left: $perc; 
+      }
+      $i: $i + 1;
+    } 
 
+    @media #{$medium-and-up} {
 
-// Extra small grid
-//
-// Columns, offsets, pushes, and pulls for extra small devices like
-// smartphones.
+      $i: 1;
+      @while $i <= $num-cols {
+        $perc: unquote((100 / ($num-cols / $i)) + "%");
+        &.m#{$i} { 
+          width: $perc; 
+          margin-left: 0;
+        }
+        $i: $i + 1;
+      } 
+      $i: 1;
+      @while $i <= $num-cols {
+        $perc: unquote((100 / ($num-cols / $i)) + "%");
+        &.offset-m#{$i} { 
+          margin-left: $perc;
+        }
+        $i: $i + 1;
+      } 
 
-@include make-grid(xs);
+    }
 
+    @media #{$large-and-up} {
 
-// Small grid
-//
-// Columns, offsets, pushes, and pulls for the small device range, from phones
-// to tablets.
+      $i: 1;
+      @while $i <= $num-cols {
+        $perc: unquote((100 / ($num-cols / $i)) + "%");
+        &.l#{$i} { 
+          width: $perc; 
+          margin-left: 0;
+        }
+        $i: $i + 1;
+      } 
+      $i: 1;
+      @while $i <= $num-cols {
+        $perc: unquote((100 / ($num-cols / $i)) + "%");
+        &.offset-l#{$i} { 
+          margin-left: $perc;
+        }
+        $i: $i + 1;
+      } 
 
-@media (min-width: $screen-sm-min) {
-  @include make-grid(sm);
-}
+    }
 
-
-// Medium grid
-//
-// Columns, offsets, pushes, and pulls for the desktop device range.
-
-@media (min-width: $screen-md-min) {
-  @include make-grid(md);
-}
-
-
-// Large grid
-//
-// Columns, offsets, pushes, and pulls for the large desktop device range.
-
-@media (min-width: $screen-lg-min) {
-  @include make-grid(lg);
+  }
 }

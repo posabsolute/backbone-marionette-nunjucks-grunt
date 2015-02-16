@@ -8,7 +8,7 @@ var _ = require('underscore'),
     Marionette = require('backbone.marionette'),
     mAnimate = require('../../utils/mAnimate.js');
 
-module.exports = Backbone.Marionette.ItemView.extend({
+module.exports = Backbone.Marionette.LayoutView.extend({
     template: "components/headerbar/headerbar.html",
     events: {
         "click .btnmenu": "loadMenu",
@@ -25,7 +25,7 @@ module.exports = Backbone.Marionette.ItemView.extend({
     templateHelpers:function(){
             return this.options;
     },
-    className: "headerbar col-md-12",
+    className: "headerbar ",
     // we change title generally when there is a page change but you can call it at anytime
     changeTitle: function(title, noAnim) {
         var $title = this.$el.find(".text");

@@ -137,7 +137,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default',['watch']);
     grunt.registerTask('templates',['nunjucks', 'uglify:dependencies']);
-    grunt.registerTask('js',['jshint','browserify']);
+    grunt.registerTask('js',['jshint','browserify:dev']);
     grunt.registerTask('build',['jshint','browserify', 'uglify']);
 
     grunt.registerTask('test-selenium',['webdriver']);
