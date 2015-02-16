@@ -3,6 +3,9 @@ var lineno = null;
 var colno = null;
 var output = "";
 try {
+output += "<div class=\"headerbar-container\">\n    <div class=\"title\">";
+output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "title"), env.autoesc);
+output += "</div>\n    <a class=\"icon btnmenu\" href=\"#\"><span class=\"icon_menu\"></span></a>\n</div>";
 cb(null, output);
 ;
 } catch (e) {

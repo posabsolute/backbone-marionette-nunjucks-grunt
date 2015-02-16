@@ -8,36 +8,24 @@ var _ = require('underscore'),
     Marionette = require('backbone.marionette'),
     mAnimate = require('../../utils/mAnimate.js');
 
-
-
-
 module.exports = Backbone.Marionette.ItemView.extend({
-    template: "components/sidebar/baseSidebar.html",
+    template: "components/headerbar/headerbar.html",
     events: {
         "click .btnmenu": "loadMenu",
         // Load actions dictated by the button creator
         "click .btnMenuRight": "loadMenuAction",
         "click .subMenuItem": "loadSubMenuAction"
     },
-    initialize: function() {
+    initialize: function(data) {
         var self = this;
         //right side button events, can add or delete
         this.listenTo(this, "removeActionBtn", this.removeActionBtn);
         this.listenTo(this, "loadActionBtn", this.actionBtn);
     },
-    className: "headerbar",
-    render: function(data) {
-        var self = this;
-        var locals = {
-            // we need a title, even if it empty
-            title: (data && data.title) ? data.title : ""
-        };
-        // set html to our topbar
-        this.$el.html(this.template({
-            data: locals
-        }));
-        return this;
+    templateHelpers:function(){
+            return this.options;
     },
+    className: "headerbar col-md-12",
     // we change title generally when there is a page change but you can call it at anytime
     changeTitle: function(title, noAnim) {
         var $title = this.$el.find(".text");

@@ -29,6 +29,15 @@ module.exports = function(grunt) {
                 'src/scripts/*.js'
             ]
         },
+        copy: {
+          fonts: {
+            expand : true,
+            cwd   :'src/',
+            src: ['fonts/*', 'fonts/**/*'], 
+            dest: 'dist/'
+          }
+
+        },
         browserify: {
           dev: {
             files: {
@@ -36,7 +45,7 @@ module.exports = function(grunt) {
             },
             options: {
               browserifyOptions : {
-                debug: true,
+                debug: true
              //   basedir : ""
               }
             }
@@ -124,6 +133,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-nunjucks');
     grunt.loadNpmTasks('grunt-webdriver');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
     grunt.registerTask('default',['watch']);
     grunt.registerTask('templates',['nunjucks', 'uglify:dependencies']);

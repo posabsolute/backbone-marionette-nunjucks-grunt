@@ -12,45 +12,6 @@ module.exports = mAnimate = {
         delay : 0,
         ease : Power1.easeOut
     },
-    // This is the default anim func
-    // every bb components go throught here
-    go :function(params){
-        // extend options with params passed from app
-        var op = $.extend({}, this.defaults, params);
-        // some android phones are too slow to use animations
-        if(mUtils.useAnim() && !op.noAnim){
-            // check is there is something to animate
-            if(op.attrs){
-                // animate using css3
-                TweenLite.to(op.to, op.speed, {
-                    css: op.attrs,
-                    delay : op.delay,
-                    ease: op.ease,
-                    onComplete: function(){
-                        // call callback if defined
-                        op.onComplete && op.onComplete();
-                    }
-                });               
-            }else{
-                // call callback if defined
-                setTimeout(function(){
-                    op.onComplete && op.onComplete();
-                }, (op.delay*1000));
-            }
-        // no animation
-        }else{
-            // check if tehre is a delay
-            if(op.delay){
-                setTimeout(function(){
-                    op.attrs && op.to.css(op.attrs);
-                    op.onComplete && op.onComplete();
-                }, (op.delay*1000));
-            }else{
-                op.attrs && op.to.css(op.attrs);
-                op.onComplete && op.onComplete();
-            }
-        }
-    },
     // used by the page component to animate pages
     page : {
         show : function(params) {
