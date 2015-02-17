@@ -4,8 +4,9 @@ var _ = require('underscore'),
 var Marionette = require('backbone.marionette'),
     //Controller = require('./controller'),
     BaseRouter = require('./router'),
-    Sidebar = require('./components/sidebar/sidebar.view');
-    Headerbar = require('./components/headerbar/headerbar.view');
+    Sidebar = require('./components/sidebar/sidebar.view'),
+    Headerbar = require('./components/headerbar/headerbar.view'),
+    DashboardLayout = require('./layouts/dashboard/dashboard.layout');
     //ContactModel = require('./models/contact'),
     //ContactsCollection = require('./collections/contacts');
     
@@ -24,6 +25,7 @@ App.addInitializer(function(options) {
         title:"Home"
     }));
     App.sidebarRegion.show(new Sidebar());
+    App.mainRegion.show(new DashboardLayout());
 });
 
 //Organize Application into regions corresponding to DOM elements

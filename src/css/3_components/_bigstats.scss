@@ -1,0 +1,16 @@
+.bigstats-component{
+	color:#fff;
+	padding:20px 0;
+	.main-stat{
+		
+		text-align:center;
+		font-size: $h2-fontsize;
+		.label{
+			font-size: $small-fontsize;
+		}
+	}
+
+	.smallstats{ 
+		text-align:center;
+	}
+}

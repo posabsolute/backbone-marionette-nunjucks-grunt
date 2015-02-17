@@ -64,7 +64,7 @@ module.exports = function(grunt) {
         nunjucks: {
           precompile: {
             baseDir: 'src/scripts',
-            src: ['src/scripts/views/**/*.html','src/scripts/components/**/*.html'],
+            src: ['src/scripts/views/**/*.html','src/scripts/components/**/*.html','src/scripts/layouts/**/*.html'],
             dest: 'src/templates.js'
           }
         },
@@ -80,7 +80,28 @@ module.exports = function(grunt) {
                 'src/templates.js',
                 'node_modules/gsap/src/minified/TweenLite.min.js',
                 'node_modules/gsap/src/minified/plugins/CSSPlugin.min.js',
-                'node_modules/gsap/src/minified/jquery.gasp.js'
+                'node_modules/gsap/src/minified/jquery.gasp.js',
+                "src/vendors/materialize/animation.js",
+                "src/vendors/materialize/velocity.min.js",
+                "src/vendors/materialize/hammer.min.js",
+                "src/vendors/materialize/jquery.hammer.js",
+                "src/vendors/materialize/collapsible.js",
+                "src/vendors/materialize/dropdown.js",
+                "src/vendors/materialize/leanModal.js",
+                "src/vendors/materialize/materialbox.js",
+                //src/vendors/materialize/s/parallax.js",
+                "src/vendors/materialize/tabs.js",
+                "src/vendors/materialize/tooltip.js",
+                "src/vendors/materialize/waves.js",
+                "src/vendors/materialize/toasts.js",
+                "src/vendors/materialize/sideNav.js",
+                //src/vendors/materialize/s/scrollspy.js",
+                "src/vendors/materialize/forms.js",
+                //src/vendors/materialize/s/slider.js",
+                //src/vendors/materialize/s/cards.js",
+                //src/vendors/materialize/s/pushpin.js",
+                "src/vendors/materialize/buttons.js",
+                //"src/vendors/materialize/transitions.js"
               ]
             }
           },
@@ -139,6 +160,7 @@ module.exports = function(grunt) {
     grunt.registerTask('templates',['nunjucks', 'uglify:dependencies']);
     grunt.registerTask('js',['jshint','browserify:dev']);
     grunt.registerTask('build',['jshint','browserify', 'uglify']);
+    grunt.registerTask('dep',['uglify:dependencies']);
 
     grunt.registerTask('test-selenium',['webdriver']);
 
